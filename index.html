@@ -5,40 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Drie Sleutels — een plaatsingsspel voor ondersteuners."
+      content="Drie Sleutels — plaatsingsspel met media en routes voor ondersteuners."
     />
     <meta name="theme-color" content="#10251d" />
     <title>Drie Sleutels</title>
     <style>
       :root {
         --bg: #0f1f1a;
-        --panel: #17382e;
-        --panel-alt: #1e4d3d;
+        --panel: #16372d;
+        --panel-alt: #1d4e3d;
         --accent: #d7b66d;
-        --accent-soft: #f0d99b;
+        --accent-soft: #efd89a;
         --text: #edf5ef;
         --muted: #cfe2d5;
-        --shadow: rgba(0, 0, 0, 0.28);
+        --shadow: rgba(0, 0, 0, 0.26);
       }
 
       * { box-sizing: border-box; }
 
-      html { scroll-behavior: smooth; }
-
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
         background:
           radial-gradient(circle at top, rgba(215, 182, 109, 0.12), transparent 28%),
           linear-gradient(180deg, #0d1815 0%, #122a23 100%);
         color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
       }
 
       .page {
-        max-width: 1100px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 48px 20px 72px;
+        padding: 36px 20px 72px;
       }
 
       .topbar {
@@ -46,31 +44,30 @@
         justify-content: space-between;
         align-items: center;
         gap: 16px;
-        margin-bottom: 36px;
+        margin-bottom: 26px;
       }
 
       .brand {
-        font-size: clamp(1.9rem, 2vw + 1rem, 3rem);
-        font-weight: 800;
-        letter-spacing: 0.04em;
+        font-size: clamp(2rem, 3vw, 3rem);
         margin: 0;
+        letter-spacing: 0.04em;
       }
 
       .tag {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 999px;
         padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
         color: var(--muted);
-        font-size: 0.82rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
+        font-size: 0.75rem;
       }
 
       .hero {
         display: grid;
-        grid-template-columns: 1.3fr 0.9fr;
-        gap: 28px;
+        grid-template-columns: 1.25fr 0.9fr;
+        gap: 24px;
         align-items: stretch;
       }
 
@@ -82,36 +79,36 @@
       }
 
       .intro {
-        padding: 28px 28px 22px;
+        padding: 28px 26px;
       }
 
       .eyebrow {
         display: inline-block;
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent-soft);
         margin-bottom: 12px;
+        color: var(--accent-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
       }
 
       h1 {
-        margin: 0 0 14px;
-        font-size: clamp(2.4rem, 3vw + 1rem, 4rem);
-        line-height: 1.05;
+        margin: 0 0 10px;
+        font-size: clamp(2.7rem, 3.5vw, 4.2rem);
+        line-height: 1.04;
       }
 
       .subtitle {
-        font-size: 1.08rem;
-        line-height: 1.7;
+        margin: 0;
         color: var(--muted);
-        margin: 0 0 22px;
+        font-size: 1.05rem;
+        line-height: 1.7;
       }
 
       .cta-row {
+        margin-top: 22px;
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 20px;
       }
 
       button {
@@ -121,29 +118,29 @@
         font-size: 1rem;
         font-weight: 700;
         cursor: pointer;
-        transition: transform 0.15s ease, opacity 0.15s ease;
+        transition: transform 0.15s ease;
       }
 
       button:hover { transform: translateY(-1px); }
       button:active { transform: translateY(0); }
 
       .primary {
-        background: linear-gradient(135deg, var(--accent), #bc8d36);
-        color: #152117;
+        background: linear-gradient(135deg, var(--accent), #bb8d36);
+        color: #172117;
       }
 
       .secondary {
-        background: rgba(255,255,255,0.05);
+        background: rgba(255,255,255,0.04);
         color: var(--text);
         border: 1px solid rgba(255,255,255,0.12);
       }
 
       .dice-panel {
-        padding: 20px;
+        padding: 22px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         min-height: 260px;
         background: linear-gradient(180deg, rgba(215, 182, 109, 0.08), rgba(255,255,255,0.02));
       }
@@ -158,60 +155,92 @@
         font-weight: 800;
         background: linear-gradient(180deg, #ead7a0, #d3aa59);
         color: #1b291e;
-        margin-bottom: 18px;
-        box-shadow: inset 0 2px 12px rgba(255,255,255,0.35), 0 18px 28px rgba(0,0,0,0.2);
+        box-shadow: inset 0 2px 12px rgba(255,255,255,0.35), 0 18px 28px rgba(0,0,0,0.18);
       }
 
       .status {
+        margin-top: 16px;
         text-align: center;
         color: var(--muted);
-        font-size: 0.95rem;
+        font-size: 0.96rem;
+        line-height: 1.5;
+      }
+
+      .media-wrap {
+        margin-top: 28px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .media-card {
+        padding: 18px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 18px;
+      }
+
+      .media-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+      }
+
+      .media-card p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      video, audio {
+        width: 100%;
+        border-radius: 12px;
+        display: block;
       }
 
       .board {
-        margin-top: 34px;
+        margin-top: 30px;
         display: grid;
         grid-template-columns: repeat(3, minmax(0,1fr));
         gap: 20px;
       }
 
       .option {
-        padding: 22px 18px;
+        padding: 20px 18px 18px;
         min-height: 210px;
       }
 
-      .option h2 {
+      .option h3 {
+        margin: 0 0 10px;
         font-size: 1.4rem;
-        margin: 0 0 12px;
       }
 
       .option p {
         margin: 0;
-        line-height: 1.7;
         color: var(--muted);
-        font-size: 0.98rem;
+        line-height: 1.7;
+      }
+
+      .pill {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-radius: 999px;
+        background: rgba(215,182,109,0.12);
+        border: 1px solid rgba(215,182,109,0.45);
+        color: var(--accent-soft);
       }
 
       .highlight {
         background: linear-gradient(180deg, rgba(215,182,109,0.12), rgba(255,255,255,0.02));
       }
 
-      .highlight .pill {
-        display: inline-block;
-        margin-bottom: 10px;
-        background: rgba(215,182,109,0.12);
-        border: 1px solid rgba(215,182,109,0.45);
-        border-radius: 999px;
-        color: var(--accent-soft);
-        padding: 6px 10px;
-        font-size: 0.7rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      @media (max-width: 800px) {
+      @media (max-width: 840px) {
         .hero,
-        .board {
+        .board,
+        .media-wrap {
           grid-template-columns: 1fr;
         }
 
@@ -232,10 +261,10 @@
       <main class="hero">
         <section class="card intro">
           <div class="eyebrow">Plaatsingsspel</div>
-          <h1>Gooi, kies en maak een passende route.</h1>
+          <h1>Gooi, kies en laat de route spreken.</h1>
           <p class="subtitle">
-            Een korte, praktische oefening voor begeleiders: gooi de dobbelsteen,
-            kies de passende route en bespreek wat het betekent voor de cliënt.
+            Een oefening voor begeleiders: gooi de dobbelsteen, kies de passende route,
+            luister naar het voorbeeld en bespreek wat de keuze betekent in een intake- of plaatsingsgesprek.
           </p>
 
           <div class="cta-row">
@@ -250,28 +279,50 @@
         </aside>
       </main>
 
+      <section class="media-wrap" aria-label="Route media">
+        <article class="media-card" id="routeMediaCard">
+          <div class="pill" id="routePill">Route</div>
+          <h2 id="routeTitle">Kies een route</h2>
+          <p id="routeText">Gebruik de dobbelsteen om een route te kiezen.</p>
+          <video id="routeVideo" controls playsinline preload="metadata">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+            Je browser ondersteunt geen video-tag.
+          </video>
+        </article>
+
+        <article class="media-card">
+          <div class="pill">Audio</div>
+          <h2>Verklaring</h2>
+          <p>Het fragment hieronder hoort bij de gekozen route en ondersteunt de uitleg.</p>
+          <audio id="routeAudio" controls preload="metadata">
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+            Je browser ondersteunt geen audio-tag.
+          </audio>
+        </article>
+      </section>
+
       <section class="board" aria-label="Routes">
         <article class="card option highlight">
           <div class="pill">Route 1</div>
-          <h2>De Aanvang</h2>
+          <h3>De Aanvang</h3>
           <p>
-            Start met een veilige, goed gestructureerde eerste stap. Kijk naar
-            stabiliteit, vertrouwen en een duidelijke eerste indruk.
+            Start met een veilige, goed gestructureerde eerste stap. Kijk naar stabiliteit,
+            vertrouwen en een duidelijke eerste indruk.
           </p>
         </article>
 
         <article class="card option">
           <div class="pill">Route 2</div>
-          <h2>Housing First</h2>
+          <h3>Housing First</h3>
           <p>
-            Kies voor vaste basis en rust. Eerst een plek om veilig te zijn, dan
-            pas verder bouwen aan andere doelen.
+            Kies voor vaste basis en rust. Eerst een plek om veilig te zijn, dan pas verder
+            bouwen aan andere doelen.
           </p>
         </article>
 
         <article class="card option">
           <div class="pill">Route 3</div>
-          <h2>De Bloemenheuvel</h2>
+          <h3>De Bloemenheuvel</h3>
           <p>
             Richt je op groei, verbinden en een leefomgeving die mogelijkheden geeft.
             Ondersteun het herstel in een bredere context.
@@ -283,6 +334,11 @@
     <script>
       const die = document.getElementById('die');
       const status = document.getElementById('status');
+      const routeTitle = document.getElementById('routeTitle');
+      const routeText = document.getElementById('routeText');
+      const routePill = document.getElementById('routePill');
+      const routeVideo = document.getElementById('routeVideo');
+      const routeAudio = document.getElementById('routeAudio');
       const rollBtn = document.getElementById('rollBtn');
       const resetBtn = document.getElementById('resetBtn');
 
@@ -290,34 +346,57 @@
         {
           value: 1,
           title: 'De Aanvang',
-          text: 'De eerste stap is duidelijk en veilig.'
+          text: 'De eerste stap is duidelijk, veilig en goed gestructureerd.',
+          video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+          audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
         },
         {
           value: 2,
           title: 'Housing First',
-          text: 'Stabiliteit en basis komen eerst.'
+          text: 'Stabiliteit en basis komen eerst. Daarna kunnen andere doelen worden ontwikkeld.',
+          video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
+          audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3'
         },
         {
           value: 3,
           title: 'De Bloemenheuvel',
-          text: 'Ervaring, groei en verbinding zijn nu belangrijk.'
+          text: 'Ervaring, groei en verbondenheid zijn nu belangrijk in het herstelproces.',
+          video: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+          audio: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
         }
       ];
 
       function setDefault() {
         die.textContent = '?';
         status.textContent = 'Klaar om te starten';
+        routePill.textContent = 'Route';
+        routeTitle.textContent = 'Kies een route';
+        routeText.textContent = 'Gebruik de dobbelsteen om een route te kiezen.';
+        routeVideo.src = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+        routeAudio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+        routeVideo.load();
+        routeAudio.load();
+      }
+
+      function selectRoute(route) {
+        routePill.textContent = 'Route ' + route.value;
+        routeTitle.textContent = route.title;
+        routeText.textContent = route.text;
+        routeVideo.src = route.video;
+        routeAudio.src = route.audio;
+        routeVideo.load();
+        routeAudio.load();
       }
 
       function rollDice() {
         const chosen = routes[Math.floor(Math.random() * routes.length)];
         die.textContent = chosen.value;
         status.textContent = `${chosen.title}: ${chosen.text}`;
+        selectRoute(chosen);
       }
 
       rollBtn.addEventListener('click', rollDice);
       resetBtn.addEventListener('click', setDefault);
-
       setDefault();
     </script>
   </body>
