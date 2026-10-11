@@ -1,23 +1,324 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Drie Sleutels — een plaatsingsspel voor ondersteuners. Gooi de dobbelsteen, kijk het intakefilmpje, kies De Aanvang, Housing First of De Bloemenheuvel."
+      content="Drie Sleutels — een plaatsingsspel voor ondersteuners."
     />
-    <meta name="theme-color" content="#0c1210" />
-    <title>Drie Sleutels — plaatsingsspel voor ondersteuners</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,680;1,9..144,520;1,9..144,640&family=Outfit:wght@340;420;530;640&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="theme-color" content="#10251d" />
+    <title>Drie Sleutels</title>
+    <style>
+      :root {
+        --bg: #0f1f1a;
+        --panel: #17382e;
+        --panel-alt: #1e4d3d;
+        --accent: #d7b66d;
+        --accent-soft: #f0d99b;
+        --text: #edf5ef;
+        --muted: #cfe2d5;
+        --shadow: rgba(0, 0, 0, 0.28);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(215, 182, 109, 0.12), transparent 28%),
+          linear-gradient(180deg, #0d1815 0%, #122a23 100%);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 20px 72px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 36px;
+      }
+
+      .brand {
+        font-size: clamp(1.9rem, 2vw + 1rem, 3rem);
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        margin: 0;
+      }
+
+      .tag {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 8px 14px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.3fr 0.9fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 22px;
+        box-shadow: 0 18px 40px var(--shadow);
+      }
+
+      .intro {
+        padding: 28px 28px 22px;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-soft);
+        margin-bottom: 12px;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-size: clamp(2.4rem, 3vw + 1rem, 4rem);
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        font-size: 1.08rem;
+        line-height: 1.7;
+        color: var(--muted);
+        margin: 0 0 22px;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 12px;
+        padding: 13px 20px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      button:hover { transform: translateY(-1px); }
+      button:active { transform: translateY(0); }
+
+      .primary {
+        background: linear-gradient(135deg, var(--accent), #bc8d36);
+        color: #152117;
+      }
+
+      .secondary {
+        background: rgba(255,255,255,0.05);
+        color: var(--text);
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .dice-panel {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 260px;
+        background: linear-gradient(180deg, rgba(215, 182, 109, 0.08), rgba(255,255,255,0.02));
+      }
+
+      .die {
+        width: 118px;
+        height: 118px;
+        border-radius: 26px;
+        display: grid;
+        place-items: center;
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(180deg, #ead7a0, #d3aa59);
+        color: #1b291e;
+        margin-bottom: 18px;
+        box-shadow: inset 0 2px 12px rgba(255,255,255,0.35), 0 18px 28px rgba(0,0,0,0.2);
+      }
+
+      .status {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .board {
+        margin-top: 34px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0,1fr));
+        gap: 20px;
+      }
+
+      .option {
+        padding: 22px 18px;
+        min-height: 210px;
+      }
+
+      .option h2 {
+        font-size: 1.4rem;
+        margin: 0 0 12px;
+      }
+
+      .option p {
+        margin: 0;
+        line-height: 1.7;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .highlight {
+        background: linear-gradient(180deg, rgba(215,182,109,0.12), rgba(255,255,255,0.02));
+      }
+
+      .highlight .pill {
+        display: inline-block;
+        margin-bottom: 10px;
+        background: rgba(215,182,109,0.12);
+        border: 1px solid rgba(215,182,109,0.45);
+        border-radius: 999px;
+        color: var(--accent-soft);
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 800px) {
+        .hero,
+        .board {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="page">
+      <header class="topbar">
+        <h1 class="brand">Drie Sleutels</h1>
+        <div class="tag">Types en plaatsing</div>
+      </header>
+
+      <main class="hero">
+        <section class="card intro">
+          <div class="eyebrow">Plaatsingsspel</div>
+          <h1>Gooi, kies en maak een passende route.</h1>
+          <p class="subtitle">
+            Een korte, praktische oefening voor begeleiders: gooi de dobbelsteen,
+            kies de passende route en bespreek wat het betekent voor de cliënt.
+          </p>
+
+          <div class="cta-row">
+            <button class="primary" id="rollBtn">Gooi de dobbelsteen</button>
+            <button class="secondary" id="resetBtn">Reset</button>
+          </div>
+        </section>
+
+        <aside class="card dice-panel">
+          <div class="die" id="die">?</div>
+          <div class="status" id="status">Klaar om te starten</div>
+        </aside>
+      </main>
+
+      <section class="board" aria-label="Routes">
+        <article class="card option highlight">
+          <div class="pill">Route 1</div>
+          <h2>De Aanvang</h2>
+          <p>
+            Start met een veilige, goed gestructureerde eerste stap. Kijk naar
+            stabiliteit, vertrouwen en een duidelijke eerste indruk.
+          </p>
+        </article>
+
+        <article class="card option">
+          <div class="pill">Route 2</div>
+          <h2>Housing First</h2>
+          <p>
+            Kies voor vaste basis en rust. Eerst een plek om veilig te zijn, dan
+            pas verder bouwen aan andere doelen.
+          </p>
+        </article>
+
+        <article class="card option">
+          <div class="pill">Route 3</div>
+          <h2>De Bloemenheuvel</h2>
+          <p>
+            Richt je op groei, verbinden en een leefomgeving die mogelijkheden geeft.
+            Ondersteun het herstel in een bredere context.
+          </p>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const die = document.getElementById('die');
+      const status = document.getElementById('status');
+      const rollBtn = document.getElementById('rollBtn');
+      const resetBtn = document.getElementById('resetBtn');
+
+      const routes = [
+        {
+          value: 1,
+          title: 'De Aanvang',
+          text: 'De eerste stap is duidelijk en veilig.'
+        },
+        {
+          value: 2,
+          title: 'Housing First',
+          text: 'Stabiliteit en basis komen eerst.'
+        },
+        {
+          value: 3,
+          title: 'De Bloemenheuvel',
+          text: 'Ervaring, groei en verbinding zijn nu belangrijk.'
+        }
+      ];
+
+      function setDefault() {
+        die.textContent = '?';
+        status.textContent = 'Klaar om te starten';
+      }
+
+      function rollDice() {
+        const chosen = routes[Math.floor(Math.random() * routes.length)];
+        die.textContent = chosen.value;
+        status.textContent = `${chosen.title}: ${chosen.text}`;
+      }
+
+      rollBtn.addEventListener('click', rollDice);
+      resetBtn.addEventListener('click', setDefault);
+
+      setDefault();
+    </script>
   </body>
 </html>
